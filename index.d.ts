@@ -1,128 +1,91 @@
-// Type definitions for gsap 3
-// Project: https://gsap.com/
-// Definitions by: Jack Doyle <https://github.com/jackdoyle>
-//                 Blake Bowen <https://github.com/OSUblake>
-//                 Pedro Tavares <https://github.com/dipscom>
-//                 Zach Saucier <https://github.com/ZachSaucier>
-// Definitions: https://github.com/greensock/GSAP
+/**
+ * Generate secure URL-friendly unique ID.
+ *
+ * By default, the ID will have 21 symbols to have a collision probability
+ * similar to UUID v4.
+ *
+ * ```js
+ * import { nanoid } from 'nanoid'
+ * model.id = nanoid() //=> "Uakgb_J5m9g-0JDMbcJqL"
+ * ```
+ *
+ * @param size Size of the ID. The default size is 21.
+ * @returns A random string.
+ */
+export function nanoid(size?: number): string
 
-/// <reference path="animation.d.ts"/>
-/// <reference path="custom-bounce.d.ts"/>
-/// <reference path="custom-ease.d.ts"/>
-/// <reference path="custom-wiggle.d.ts"/>
-/// <reference path="css-plugin.d.ts"/>
-/// <reference path="css-rule-plugin.d.ts"/>
-/// <reference path="draggable.d.ts"/>
-/// <reference path="draw-svg-plugin.d.ts"/>
-/// <reference path="ease.d.ts"/>
-/// <reference path="easel-plugin.d.ts"/>
-/// <reference path="flip.d.ts"/>
-/// <reference path="gs-dev-tools.d.ts"/>
-/// <reference path="gsap-plugins.d.ts"/>
-/// <reference path="gsap-utils.d.ts"/>
-/// <reference path="inertia-plugin.d.ts"/>
-/// <reference path="morph-svg-plugin.d.ts"/>
-/// <reference path="motion-path-plugin.d.ts"/>
-/// <reference path="motion-path-helper.d.ts"/>
-/// <reference path="observer.d.ts"/>
-/// <reference path="physics-2d-plugin.d.ts"/>
-/// <reference path="physics-props-plugin.d.ts"/>
-/// <reference path="pixi-plugin.d.ts"/>
-/// <reference path="scramble-text-plugin.d.ts"/>
-/// <reference path="scroll-to-plugin.d.ts"/>
-/// <reference path="scroll-trigger.d.ts"/>
-/// <reference path="scroll-smoother.d.ts"/>
-/// <reference path="split-text.d.ts"/>
-/// <reference path="text-plugin.d.ts"/>
-/// <reference path="timeline.d.ts"/>
-/// <reference path="tween.d.ts"/>
-/// <reference path="utils/velocity-tracker.d.ts"/>
-/// <reference path="gsap-core.d.ts"/>
+/**
+ * Generate secure unique ID with custom alphabet.
+ *
+ * Alphabet must contain 256 symbols or less. Otherwise, the generator
+ * will not be secure.
+ *
+ * @param alphabet Alphabet used to generate the ID.
+ * @param defaultSize Size of the ID. The default size is 21.
+ * @returns A random string generator.
+ *
+ * ```js
+ * const { customAlphabet } = require('nanoid')
+ * const nanoid = customAlphabet('0123456789абвгдеё', 5)
+ * nanoid() //=> "8ё56а"
+ * ```
+ */
+export function customAlphabet(
+  alphabet: string,
+  defaultSize?: number
+): (size?: number) => string
 
-// Global types
-type GSAPDraggableVars = Draggable.Vars;
-type GSAPAnimation = gsap.core.Animation;
-type GSAPCallback = gsap.Callback;
-type GSAPDistributeConfig = gsap.utils.DistributeConfig;
-type GSAPPlugin = gsap.Plugin;
-type GSAPPluginScope = gsap.PluginScope;
-type GSAPPluginStatic = gsap.PluginStatic;
-type GSAPStaggerVars = gsap.StaggerVars;
-type GSAPTickerCallback = gsap.TickerCallback;
-type GSAPTimeline = gsap.core.Timeline;
-type GSAPTimelineVars = gsap.TimelineVars;
-type GSAPTween = gsap.core.Tween;
-type GSAPTweenTarget = gsap.TweenTarget;
-type GSAPTweenVars = gsap.TweenVars;
+/**
+ * Generate unique ID with custom random generator and alphabet.
+ *
+ * Alphabet must contain 256 symbols or less. Otherwise, the generator
+ * will not be secure.
+ *
+ * ```js
+ * import { customRandom } from 'nanoid/format'
+ *
+ * const nanoid = customRandom('abcdef', 5, size => {
+ *   const random = []
+ *   for (let i = 0; i < size; i++) {
+ *     random.push(randomByte())
+ *   }
+ *   return random
+ * })
+ *
+ * nanoid() //=> "fbaef"
+ * ```
+ *
+ * @param alphabet Alphabet used to generate a random string.
+ * @param size Size of the random string.
+ * @param random A random bytes generator.
+ * @returns A random string generator.
+ */
+export function customRandom(
+  alphabet: string,
+  size: number,
+  random: (bytes: number) => Uint8Array
+): () => string
 
-type GSAP = typeof gsap;
+/**
+ * URL safe symbols.
+ *
+ * ```js
+ * import { urlAlphabet } from 'nanoid'
+ * const nanoid = customAlphabet(urlAlphabet, 10)
+ * nanoid() //=> "Uakgb_J5m9"
+ * ```
+ */
+export const urlAlphabet: string
 
-declare module "gsap" {
-  export * from "gsap/gsap-core";
-  export { gsap as default } from "gsap/gsap-core";
-}
-
-declare module "gsap/src" {
-  export * from "gsap";
-  export { gsap as default } from "gsap";
-}
-
-declare module "gsap/src/index" {
-  export * from "gsap";
-  export { gsap as default } from "gsap";
-}
-
-declare module "gsap/dist" {
-  export * from "gsap";
-  export { gsap as default } from "gsap";
-}
-
-declare module "gsap/dist/gsap" {
-  export * from "gsap";
-  export { gsap as default } from "gsap";
-}
-
-declare module "gsap/all" {
-  export * from "gsap";
-  export { gsap as default } from "gsap";
-}
-
-declare module "gsap/src/all" {
-  export * from "gsap/all";
-  export { gsap as default } from "gsap/all";
-}
-
-declare module "gsap-trial" {
-  export * from "gsap/gsap-core";
-  export { gsap as default } from "gsap/gsap-core";
-}
-
-declare module "gsap-trial/src" {
-  export * from "gsap";
-  export { gsap as default } from "gsap";
-}
-
-declare module "gsap-trial/src/index" {
-  export * from "gsap";
-  export { gsap as default } from "gsap";
-}
-
-declare module "gsap-trial/dist" {
-  export * from "gsap";
-  export { gsap as default } from "gsap";
-}
-
-declare module "gsap-trial/dist/gsap" {
-  export * from "gsap";
-  export { gsap as default } from "gsap";
-}
-
-declare module "gsap-trial/all" {
-  export * from "gsap";
-  export { gsap as default } from "gsap";
-}
-
-declare module "gsap-trial/src/all" {
-  export * from "gsap/all";
-  export { gsap as default } from "gsap/all";
-}
+/**
+ * Generate an array of random bytes collected from hardware noise.
+ *
+ * ```js
+ * import { customRandom, random } from 'nanoid'
+ * const nanoid = customRandom("abcdef", 5, random)
+ * ```
+ *
+ * @param bytes Size of the array.
+ * @returns An array of random bytes.
+ */
+export function random(bytes: number): Uint8Array

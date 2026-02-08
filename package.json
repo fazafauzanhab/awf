@@ -1,74 +1,88 @@
 {
-    "name": "gsap",
-    "version": "3.14.2",
-    "description": "GSAP is a framework-agnostic JavaScript animation library that turns developers into animation superheroes. Build high-performance animations that work in **every** major browser. Animate CSS, SVG, canvas, React, Vue, WebGL, colors, strings, motion paths, generic objects...anything JavaScript can touch! The ScrollTrigger plugin lets you create jaw-dropping scroll-based animations with minimal code. No other library delivers such advanced sequencing, reliability, and tight control while solving real-world problems on millions of sites. GSAP works around countless browser inconsistencies; your animations **just work**. At its core, GSAP is a high-speed property manipulator, updating values over time with extreme accuracy.",
-    "homepage": "https://gsap.com",
-    "module": "index.js",
-    "main": "dist/gsap.js",
-    "types": "types/index.d.ts",
-    "sideEffects": false,
-    "exports": {
-        ".": {
-            "import": "./index.js",
-            "require": "./dist/gsap.js",
-            "types": "./types/index.d.ts",
-            "default": "./index.js"
-        },
-        "./dist/*.js": "./dist/*.js",
-        "./dist/*": "./dist/*.js",
-        "./*.js": {
-            "import": "./*.js",
-            "require": "./dist/*.js",
-            "types": "./types/*.d.ts",
-            "default": "./*.js"
-        },
-        "./*": {
-            "import": "./*.js",
-            "require": "./dist/*.js",
-            "types": "./types/*.d.ts",
-            "default": "./*.js"
-        },
-        "./types/*": "./types/*",
-        "./package.json": "./package.json"
+  "name": "postcss",
+  "version": "8.5.6",
+  "description": "Tool for transforming styles with JS plugins",
+  "engines": {
+    "node": "^10 || ^12 || >=14"
+  },
+  "exports": {
+    ".": {
+      "import": "./lib/postcss.mjs",
+      "require": "./lib/postcss.js"
     },
-    "keywords": [
-        "GSAP",
-        "GreenSock",
-        "animation",
-        "MotionPathPlugin",
-        "motion",
-        "motionPath",
-        "matchMedia",
-        "easing",
-        "ScrollTrigger",
-        "ScrollSmoother",
-        "Observer",
-        "JavaScript",
-        "PixiPlugin",
-        "CustomEase",
-        "Flip",
-        "SVG",
-        "3D",
-        "2D",
-        "transform",
-        "morph",
-        "morphing",
-        "tweening",
-        "Webflow"
-    ],
-    "maintainers": [
-        {
-            "name": "Jack Doyle",
-            "email": "jack@greensock.com",
-            "web": "https://gsap.com"
-        }
-    ],
-    "license": "Standard 'no charge' license: https://gsap.com/standard-license.",
-    "bugs": {
-        "url": "https://gsap.com/community/"
+    "./lib/at-rule": "./lib/at-rule.js",
+    "./lib/comment": "./lib/comment.js",
+    "./lib/container": "./lib/container.js",
+    "./lib/css-syntax-error": "./lib/css-syntax-error.js",
+    "./lib/declaration": "./lib/declaration.js",
+    "./lib/fromJSON": "./lib/fromJSON.js",
+    "./lib/input": "./lib/input.js",
+    "./lib/lazy-result": "./lib/lazy-result.js",
+    "./lib/no-work-result": "./lib/no-work-result.js",
+    "./lib/list": "./lib/list.js",
+    "./lib/map-generator": "./lib/map-generator.js",
+    "./lib/node": "./lib/node.js",
+    "./lib/parse": "./lib/parse.js",
+    "./lib/parser": "./lib/parser.js",
+    "./lib/postcss": "./lib/postcss.js",
+    "./lib/previous-map": "./lib/previous-map.js",
+    "./lib/processor": "./lib/processor.js",
+    "./lib/result": "./lib/result.js",
+    "./lib/root": "./lib/root.js",
+    "./lib/rule": "./lib/rule.js",
+    "./lib/stringifier": "./lib/stringifier.js",
+    "./lib/stringify": "./lib/stringify.js",
+    "./lib/symbols": "./lib/symbols.js",
+    "./lib/terminal-highlight": "./lib/terminal-highlight.js",
+    "./lib/tokenize": "./lib/tokenize.js",
+    "./lib/warn-once": "./lib/warn-once.js",
+    "./lib/warning": "./lib/warning.js",
+    "./package.json": "./package.json"
+  },
+  "main": "./lib/postcss.js",
+  "types": "./lib/postcss.d.ts",
+  "keywords": [
+    "css",
+    "postcss",
+    "rework",
+    "preprocessor",
+    "parser",
+    "source map",
+    "transform",
+    "manipulation",
+    "transpiler"
+  ],
+  "funding": [
+    {
+      "type": "opencollective",
+      "url": "https://opencollective.com/postcss/"
     },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/greensock/GSAP.git"
+    {
+      "type": "tidelift",
+      "url": "https://tidelift.com/funding/github/npm/postcss"
+    },
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/ai"
     }
+  ],
+  "author": "Andrey Sitnik <andrey@sitnik.ru>",
+  "license": "MIT",
+  "homepage": "https://postcss.org/",
+  "repository": "postcss/postcss",
+  "bugs": {
+    "url": "https://github.com/postcss/postcss/issues"
+  },
+  "dependencies": {
+    "nanoid": "^3.3.11",
+    "picocolors": "^1.1.1",
+    "source-map-js": "^1.2.1"
+  },
+  "browser": {
+    "./lib/terminal-highlight": false,
+    "source-map-js": false,
+    "path": false,
+    "url": false,
+    "fs": false
+  }
 }

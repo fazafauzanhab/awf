@@ -1,6 +1,17 @@
-import { gsap, Power0, Power1, Power2, Power3, Power4, Linear, Quad, Cubic, Quart, Quint, Strong, Elastic, Back, SteppedEase, Bounce, Sine, Expo, Circ, TweenLite, TimelineLite, TimelineMax } from "./gsap-core.js";
-import { CSSPlugin } from "./CSSPlugin.js";
-var gsapWithCSS = gsap.registerPlugin(CSSPlugin) || gsap,
-    // to protect from tree shaking
-TweenMaxWithCSS = gsapWithCSS.core.Tween;
-export { gsapWithCSS as gsap, gsapWithCSS as default, CSSPlugin, TweenMaxWithCSS as TweenMax, TweenLite, TimelineMax, TimelineLite, Power0, Power1, Power2, Power3, Power4, Linear, Quad, Cubic, Quart, Quint, Strong, Elastic, Back, SteppedEase, Bounce, Sine, Expo, Circ };
+'use strict';
+
+const pico = require('./lib/picomatch');
+const utils = require('./lib/utils');
+
+function picomatch(glob, options, returnState = false) {
+  // default to os.platform()
+  if (options && (options.windows === null || options.windows === undefined)) {
+    // don't mutate the original options object
+    options = { ...options, windows: utils.isWindows() };
+  }
+
+  return pico(glob, options, returnState);
+}
+
+Object.assign(picomatch, pico);
+module.exports = picomatch;
